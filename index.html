@@ -2,46 +2,32 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Unique Academy | Grade 10 Biology</title>
+<title>Unique Academy</title>
 
 <style>
 body{
   font-family: Arial, sans-serif;
   background:#f4f7ff;
-  margin:0;
-  line-height:1.7;
+  text-align:center;
 }
+
 header{
   background:#0a3cff;
   color:white;
   padding:30px;
-  text-align:center;
 }
-section{
-  padding:30px;
-  background:white;
-  margin:20px;
-  border-radius:8px;
+
+select, button{
+  padding:10px;
+  margin:10px;
+  font-size:16px;
 }
-h2{
-  color:#0a3cff;
-}
-.important{
-  color:#d60000;
+
+#result{
+  margin-top:30px;
+  font-size:18px;
+  color:#333;
   font-weight:bold;
-}
-.key{
-  color:#008000;
-  font-weight:bold;
-}
-.term{
-  color:#800080;
-  font-weight:bold;
-}
-footer{
-  background:#eaeaea;
-  text-align:center;
-  padding:20px;
 }
 </style>
 </head>
@@ -49,167 +35,70 @@ footer{
 <body>
 
 <header>
-<h1>Unique Academy</h1>
-<p>Grade 10 Biology – Full Tutorial</p>
+  <h1>Unique Academy</h1>
+  <p>Select Subject → Grade → Chapter</p>
 </header>
 
-<section>
-<h2>1. Biology and Life</h2>
-<p>
-<span class="term">Biology</span> is the study of living organisms.
-</p>
-<p class="important">
-Living things show characteristics such as growth, respiration, reproduction, and response to stimuli.
-</p>
-</section>
+<!-- SUBJECT -->
+<select id="subject" onchange="loadGrades()">
+  <option value="">Select Subject</option>
+  <option>Mathematics</option>
+  <option>Biology</option>
+  <option>Physics</option>
+  <option>Chemistry</option>
+  <option>English</option>
+</select>
 
-<section>
-<h2>2. The Cell</h2>
-<p>
-The <span class="term">cell</span> is the basic unit of life.
-</p>
-<p class="key">
-All living organisms are made of cells.
-</p>
-</section>
+<!-- GRADE -->
+<select id="grade" onchange="loadChapters()" disabled>
+  <option value="">Select Grade</option>
+</select>
 
-<section>
-<h2>3. Types of Cells</h2>
-<ul>
-<li><span class="term">Prokaryotic cells</span> – no nucleus</li>
-<li><span class="term">Eukaryotic cells</span> – have nucleus</li>
-</ul>
-<p class="important">
-Bacteria are prokaryotic organisms.
-</p>
-</section>
+<!-- CHAPTER -->
+<select id="chapter" onchange="showResult()" disabled>
+  <option value="">Select Chapter</option>
+</select>
 
-<section>
-<h2>4. Cell Structure</h2>
-<ul>
-<li><span class="term">Nucleus</span> – controls activities</li>
-<li><span class="term">Mitochondria</span> – energy production</li>
-<li><span class="term">Ribosomes</span> – protein synthesis</li>
-</ul>
-<p class="important">
-Mitochondria are called the powerhouse of the cell.
-</p>
-</section>
+<div id="result"></div>
 
-<section>
-<h2>5. Plant and Animal Cells</h2>
-<p>
-<span class="key">Plant cells</span> have cell wall and chloroplast.
-</p>
-<p class="important">
-Animal cells do NOT have chloroplast.
-</p>
-</section>
+<script>
+function loadGrades(){
+  let grade = document.getElementById("grade");
+  grade.innerHTML = `
+    <option value="">Select Grade</option>
+    <option>Grade 9</option>
+    <option>Grade 10</option>
+    <option>Grade 11</option>
+    <option>Grade 12</option>
+  `;
+  grade.disabled = false;
 
-<section>
-<h2>6. Levels of Organization</h2>
-<p>
-Cell → Tissue → Organ → System → Organism
-</p>
-<p class="important">
-Each level is more complex than the previous.
-</p>
-</section>
+  document.getElementById("chapter").disabled = true;
+  document.getElementById("result").innerHTML = "";
+}
 
-<section>
-<h2>7. Nutrition</h2>
-<p>
-<span class="term">Nutrition</span> is the process of obtaining food.
-</p>
-<p class="key">
-Food provides energy and materials for growth.
-</p>
-</section>
+function loadChapters(){
+  let chapter = document.getElementById("chapter");
+  chapter.innerHTML = `<option value="">Select Chapter</option>`;
 
-<section>
-<h2>8. Photosynthesis</h2>
-<p>
-<span class="term">Photosynthesis</span> is the process by which green plants make food.
-</p>
-<p class="important">
-Occurs in chloroplast using sunlight.
-</p>
-</section>
+  for(let i=1; i<=10; i++){
+    chapter.innerHTML += `<option>Chapter ${i}</option>`;
+  }
 
-<section>
-<h2>9. Respiration</h2>
-<p>
-<span class="term">Respiration</span> releases energy from food.
-</p>
-<p class="important">
-Respiration is NOT breathing.
-</p>
-</section>
+  chapter.disabled = false;
+}
 
-<section>
-<h2>10. Human Digestive System</h2>
-<p>
-Digestion breaks food into simple substances.
-</p>
-<p class="key">
-Main organs: mouth, stomach, intestines.
-</p>
-</section>
+function showResult(){
+  let subject = document.getElementById("subject").value;
+  let grade = document.getElementById("grade").value;
+  let chapter = document.getElementById("chapter").value;
 
-<section>
-<h2>11. Circulatory System</h2>
-<p>
-Blood transports oxygen and nutrients.
-</p>
-<p class="important">
-Heart pumps blood throughout the body.
-</p>
-</section>
-
-<section>
-<h2>12. Respiratory System</h2>
-<p>
-<span class="term">Lungs</span> help in gaseous exchange.
-</p>
-<p class="important">
-Oxygen is required for respiration.
-</p>
-</section>
-
-<section>
-<h2>13. Excretion</h2>
-<p>
-<span class="term">Excretion</span> removes waste products.
-</p>
-<p class="key">
-Kidneys are main excretory organs.
-</p>
-</section>
-
-<section>
-<h2>14. Reproduction</h2>
-<p>
-<span class="term">Reproduction</span> produces new individuals.
-</p>
-<p class="important">
-Ensures continuity of species.
-</p>
-</section>
-
-<section>
-<h2>15. Health and Disease</h2>
-<p>
-Health is a state of physical and mental well-being.
-</p>
-<p class="important">
-Good hygiene prevents diseases.
-</p>
-</section>
-
-<footer>
-<p>Prepared by Kenenisa | Phone: +251923758307</p>
-<p>© 2025 Unique Academy</p>
-</footer>
+  document.getElementById("result").innerHTML =
+    "You selected: <br>" +
+    subject + " → " + grade + " → " + chapter +
+    "<br><br>(Lesson content will appear here)";
+}
+</script>
 
 </body>
 </html>
